@@ -22,7 +22,7 @@
                             <th scope="col">NIP</th>
                             <th scope="col">Email</th>
                             <th scope="col">Nama guru</th>
-                            <th scope="col">foto</th>
+                            <th scope="col">Foto</th>
                             <th scope="col">Action</th>
 
                         </tr>

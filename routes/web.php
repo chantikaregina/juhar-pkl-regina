@@ -3,8 +3,10 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DudiController;
 use App\Http\Controllers\Admin\GuruController;
+use App\Http\Controllers\Admin\PembimbingController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Models\Admin\Dudi;
+use App\Models\Admin\Pembimbing;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,6 +33,16 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/dudi/tambah', [DudiController::class, 'store'])->name('admin.dudi.store');
     Route::get('/admin/dudi/delete/{id}', [DudiController::class, 'delete'])->name('admin.dudi.delete');
     Route::get('/admin/dudi/edit/{id}', [DudiController::class, 'edit'])->name('admin.dudi.edit');
+    Route::put('/admin/dudi/edit/{id}', [DudiController::class, 'update'])->name('admin.dudi.update');
+
+
+    Route::get('/admin/pembimbing', [PembimbingController::class, 'pembimbing'])->name('admin.pembimbing');
+    Route::get('/admin/pembimbing/tambah', [PembimbingController::class, 'create'])->name('admin.pembimbing.create');
+    Route::post('/admin/pembimbing/tambah', [PembimbingController::class, 'store'])->name('admin.pembimbing.store');
+    Route::get('/admin/pembimbing/edit/{id}', [PembimbingController::class, 'edit'])->name('admin.pembimbing.edit');
+    Route::put('/admin/pembimbing/edit/{id}', [PembimbingController::class, 'update'])->name('admin.pembimbing.update');
+    Route::get('/admin/pembimbing/delete/{id}', [PembimbingController::class, 'delete'])->name('admin.pembimbing.delete');
+
 
 
 });
