@@ -67,4 +67,23 @@ class KegiatanController extends Controller
 
         return view('guru.detail_kegiatan', compact('id','kegiatan'));
     }
+
+    public function cariKegiatan(Request $request, $id, $id_siswa) {
+        $request->validate([
+            'tanggal_awal' => 'required|date',
+            'tanggal_akhir' => 'required|date|after_or_equal:tanggal_awal',
+
+        ]);
+
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
+
+        $kegiatans = Kegiatan::where('id_siswa', $id_siswa)
+            ->whereBetween('tanggal_kegiatan', [$tanggalAwal, $tanggalAkhir])
+            ->get();
+
+        $id_pembimbing = $id;
+
+        return view('guru.kegiatan', compact('kegiatans', 'id_pembimbing', 'id_siswa', 'tanggalAwal', 'tanggalAkhir'));  
+    }
 }
