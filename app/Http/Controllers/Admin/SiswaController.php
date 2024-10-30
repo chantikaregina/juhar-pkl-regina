@@ -18,6 +18,10 @@ class SiswaController extends Controller
      */
     public function siswa($id)
     {
+        $pembimbing = Pembimbing::find($id);
+        if (!$pembimbing) {
+            return back();
+        }
         $siswas = Siswa::where('id_pembimbing', $id)->get();
         $siswa = Siswa::where('id_pembimbing', $id)->first();
 
@@ -29,6 +33,10 @@ class SiswaController extends Controller
      */
     public function create($id)
     {
+        $pembimbing = Pembimbing::find($id);
+        if (!$pembimbing) {
+            return back();
+        }
         return view('admin.tambah_siswa', compact('id'));
     }
 
@@ -97,7 +105,14 @@ class SiswaController extends Controller
      */
     public function edit($id, $id_siswa)
     {
+        $pembimbing = Pembimbing::find($id);
+        if (!$pembimbing) {
+            return back();
+        }
         $siswa = Siswa::find($id_siswa);
+        if (!$siswa) {
+            return back();
+        }
         return view('admin.edit_siswa', compact('siswa', 'id'));
     }
 
@@ -227,7 +242,7 @@ class SiswaController extends Controller
                             ->where('id_kegiatan', $id_kegiatan)
                             ->first();
         if (!$kegiatan) {
-            return back()->withErrors(['access'=>'kegiatan tidak tersedia']);
+            return back()->withErrors(['access' => 'kegiatan tidak tersedia']);
         }
 
         return view('siswa.edit_kegiatan', compact('kegiatan','siswa','id_kegiatan'));

@@ -4,6 +4,26 @@
 
 @section('content')
 
+    @if ($errors->has('access'))
+        <div class="alert alert-danger">
+            {{ $errors->first('access') }}
+        </div>
+    @endif
+
+    @if ($kegiatan)
+        <div class="row bg-light rounded align-items-center mx-0">
+            <div class="col-md-6 p-3">
+                <table>
+                    <tr>
+                        <td width="100">nama siswa</td>
+                        <td width="10">:</td>
+                        <td>{{ $kegiatan->kegiatanSiswa->nama_siswa }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+    @endif
     <div class="row g-4">
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
@@ -12,24 +32,10 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                @if ($kegiatan)
-                    <div class="row bg-light rounded align-items-center mx-0">
-                        <div class="col-md-6 p-3">
-                            <table>
-                                <tr>
-                                    <td width="100">nama siswa</td>
-                                    <td width="10">:</td>
-                                    <td>{{ $kegiatan->kegiatanSiswa->nama_siswa }}</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <br>
-                @endif
                 <h6 class="mb-4">Data kegiatan</h6>
                 <div class="table-responsive">
                     <form
-                        action="{{ route('guru.pembimbing.siswa.cari', ['id' => $id_pembimbing, 'id_siswa' => $id_siswa]) }}"
+                        action="{{ route('guru.pembimbing.siswa.kegiatan.cari', ['id' => $id_pembimbing, 'id_siswa' => $id_siswa]) }}"
                         method="GET" class="row g-3">
                         <div class="col-auto">
                             <label for="tanggal_awal" class="form-label">tanggal awal</label>
@@ -40,22 +46,22 @@
                                     {{ $message }}
                                 @enderror
                             </div>
-                            <div class="col-auto">
-                                <label for="tanggal_akhir" class="form-label">tanggal akhir</label>
-                                <input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir"
-                                    value="{{ $tanggalAkhir ?? '' }}">
-                                <div class="text-danger">
-                                    @error('tanggal_akhir')
-                                        {{ $message }}
-                                    @enderror
-                                </div>
+                        </div>
+                        <div class="col-auto">
+                            <label for="tanggal_akhir" class="form-label">tanggal akhir</label>
+                            <input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir"
+                                value="{{ $tanggalAkhir ?? '' }}">
+                            <div class="text-danger">
+                                @error('tanggal_akhir')
+                                    {{ $message }}
+                                @enderror
                             </div>
-                            <div class="col-auto align-self-end">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></button>
-                                <a href="{{ route('guru.pembimbing.siswa.kegiatan', ['id' => $id_pembimbing, 'id_siswa' => $id_siswa]) }}"
-                                    class="btn btn-primary"><i class="fas fa-sync-alt"></i></a>
-
-                            </div>
+                        </div>
+                        <div class="col-auto align-self-end">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                            <a href="{{ route('guru.pembimbing.siswa.kegiatan', ['id' => $id_pembimbing, 'id_siswa' => $id_siswa]) }}"
+                                class="btn btn-primary"><i class="fas fa-sync-alt"></i></a>
+                        </div>
                     </form>
                     <table class="table" id="kegiatan">
                         <thead>

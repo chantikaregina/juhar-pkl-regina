@@ -4,6 +4,12 @@
 
 @section('content')
 
+    @if ($errors->has('access'))
+        <div class="alert alert-danger">
+            {{ $errors->first('access') }}
+        </div>
+    @endif
+
     <div class="row g-4">
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
@@ -32,9 +38,13 @@
                                     <td>{{ $kegiatan->tanggal_kegiatan }}</td>
                                     <td>{{ $kegiatan->nama_kegiatan }}</td>
                                     <td>
-                                        <a href="{{ route('siswa.kegiatan.edit', ['id_kegiatan' => $kegiatan->id_kegiatan]) }}" class="btn btn-warning btn-sm">edit</a>
-                                        <a href="{{ route('siswa.kegiatan.delete', ['id_kegiatan' => $kegiatan->id_kegiatan]) }}" onclick="return confirm('yakin ingin hapus data')" class="btn btn-danger btn-sm">hapus</a>
-                                        <a href="{{ route('siswa.kegiatan.detail', ['id_kegiatan' => $kegiatan->id_kegiatan]) }}" class="btn btn-info btn-sm">detail</a>
+                                        <a href="{{ route('siswa.kegiatan.edit', ['id_kegiatan' => $kegiatan->id_kegiatan]) }}"
+                                            class="btn btn-warning btn-sm">edit</a>
+                                        <a href="{{ route('siswa.kegiatan.delete', ['id_kegiatan' => $kegiatan->id_kegiatan]) }}"
+                                            onclick="return confirm('yakin ingin hapus data')"
+                                            class="btn btn-danger btn-sm">hapus</a>
+                                        <a href="{{ route('siswa.kegiatan.detail', ['id_kegiatan' => $kegiatan->id_kegiatan]) }}"
+                                            class="btn btn-info btn-sm">detail</a>
                                     </td>
                                 </tr>
                             @endforeach

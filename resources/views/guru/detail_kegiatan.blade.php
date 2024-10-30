@@ -3,20 +3,26 @@
 @section('title', 'detail kegiatan')
 
 @section('content')
-@if ($kegiatan)
-                    <div class="row bg-light rounded align-items-center mx-0">
-                        <div class="col-md-6 p-3">
-                            <table>
-                                <tr>
-                                    <td width="100">nama siswa</td>
-                                    <td width="10">:</td>
-                                    <td>{{ $kegiatan->kegiatanSiswa->nama_siswa }}</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <br>
-                @endif
+
+    @if ($errors->has('access'))
+        <div class="alert alert-danger">
+            {{ $errors->first('access') }}
+        </div>
+    @endif
+    @if ($kegiatan)
+        <div class="row bg-light rounded align-items-center mx-0">
+            <div class="col-md-6 p-3">
+                <table>
+                    <tr>
+                        <td width="100">nama siswa</td>
+                        <td width="10">:</td>
+                        <td>{{ $kegiatan->kegiatanSiswa->nama_siswa }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+    @endif
     <div class="row g-4">
         <div class="col-sm-12">
             <div class="bg-light rounded h-100 p-4">
@@ -39,7 +45,8 @@
                         <img src="{{ asset('storage/' . $kegiatan->foto) }}" alt="kegiatan" height="700">
                     </div>
                 </div>
-                <a href="{{ route('guru.pembimbing.siswa.kegiatan', ['id' => $id, 'id_siswa' => $kegiatan->id_siswa]) }}" class="btn btn-primary">kembali</a>
+                <a href="{{ route('guru.pembimbing.siswa.kegiatan', ['id' => $id, 'id_siswa' => $kegiatan->id_siswa]) }}"
+                    class="btn btn-primary">kembali</a>
             </div>
         </div>
     </div>

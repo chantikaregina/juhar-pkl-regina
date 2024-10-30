@@ -44,6 +44,8 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/guru/tambah', [GuruController::class, 'store'])->name('admin.guru.store');
     Route::get('/admin/guru/delete/{id}', [GuruController::class, 'delete'])->name('admin.guru.delete');
     Route::get('/admin/guru/edit/{id}', [GuruController::class, 'edit'])->name('admin.guru.edit');
+    Route::put('/admin/guru/edit/{id}', [GuruController::class, 'update'])->name('admin.guru.update');
+
     Route::get('/admin/dudi', [DudiController::class, 'dudi'])->name('admin.dudi');
     Route::get('/admin/dudi/tambah', [DudiController::class, 'create'])->name('admin.dudi.create');
     Route::post('/admin/dudi/tambah', [DudiController::class, 'store'])->name('admin.dudi.store');
